@@ -36,8 +36,6 @@ class HomeFragment : Fragment() {
             }
         }
 
-        binding.logoutButton.setOnClickListener {
-            viewModel.logout()
-        }
+
     }
 }
