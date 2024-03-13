@@ -9,7 +9,9 @@ data class Station (
     val lat: Double,
     val lng: Double,
     val dist: Double,
-    val price: Double,
+    val diesel: Double,
+    val e5: Double,
+    val e10: Double?,
     val isOpen: Boolean,
     val houseNumber: String,
     val postCode: Int
