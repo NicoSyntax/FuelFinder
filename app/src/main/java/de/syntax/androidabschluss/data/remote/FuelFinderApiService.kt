@@ -2,7 +2,7 @@ package de.syntax.androidabschluss.data.remote
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import de.syntax.androidabschluss.data.model.ServerResponse
+import de.syntax.androidabschluss.data.model.ApiResponse
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -35,8 +35,8 @@ private val retrofit = Retrofit.Builder()
 interface FuelFinderApiService{
     @GET("json/list.php?lat=52.45277&lng=9.75456&rad=4&type=all&")
     suspend fun getStations(
-        @Query("key") key: String
-    ): ServerResponse
+        @Query("apikey") key: String
+    ): ApiResponse
 }
 
 object FuelFinderApi{

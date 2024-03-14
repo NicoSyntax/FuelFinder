@@ -8,11 +8,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import de.syntax.androidabschluss.R
+import de.syntax.androidabschluss.adapter.HomeAdapter
 import de.syntax.androidabschluss.databinding.FragmentHomeBinding
 import de.syntax.androidabschluss.viewmodel.FirebaseViewModel
+import de.syntax.androidabschluss.viewmodel.MainViewModel
 
 class HomeFragment : Fragment() {
     private val viewModel: FirebaseViewModel by activityViewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
     private lateinit var binding: FragmentHomeBinding
     private lateinit var userMail: String
 
@@ -21,6 +24,7 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        mainViewModel.loadStations()
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -35,7 +39,9 @@ class HomeFragment : Fragment() {
                 userMail = user.email.toString()
             }
         }
-
-
+        mainViewModel.stations.observe(viewLifecycleOwner){ station ->
+            binding.rvStations.adapter = HomeAdapter(station.stations.sortedByDescending { it.isOpen })
+            binding.rvStations.setHasFixedSize(true)
+        }
     }
 }

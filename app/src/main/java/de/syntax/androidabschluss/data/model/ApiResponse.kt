@@ -1,6 +1,6 @@
 package de.syntax.androidabschluss.data.model
 
-data class ServerResponse(
+data class ApiResponse(
     val ok: Boolean,
     val license: String,
     val data: String,

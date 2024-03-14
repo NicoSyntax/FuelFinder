@@ -3,7 +3,7 @@ package de.syntax.androidabschluss.data
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import de.syntax.androidabschluss.data.model.ServerResponse
+import de.syntax.androidabschluss.data.model.ApiResponse
 import de.syntax.androidabschluss.data.remote.FuelFinderApi
 
 
@@ -12,8 +12,8 @@ class Repository(private val api: FuelFinderApi) {
 
     private val key = "eaefa201-66ec-a001-e4ee-8a91dfdcc983"
 
-    private val _stationList = MutableLiveData<ServerResponse>()
-    val stationList: LiveData<ServerResponse>
+    private val _stationList = MutableLiveData<ApiResponse>()
+    val stationList: LiveData<ApiResponse>
         get() = _stationList
 
     suspend fun getStations() {

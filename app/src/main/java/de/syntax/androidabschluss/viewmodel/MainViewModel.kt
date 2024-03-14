@@ -15,9 +15,6 @@ class MainViewModel (application: Application): AndroidViewModel(application){
 
     val stations = repository.stationList
 
-    init {
-        loadStations()
-    }
 
     fun loadStations(){
         try {

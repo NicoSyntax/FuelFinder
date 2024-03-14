@@ -14,5 +14,6 @@ data class Station (
     val e10: Double?,
     val isOpen: Boolean,
     val houseNumber: String,
-    val postCode: Int
+    val postCode: Int,
+    var isFavourite: Boolean = false
 )

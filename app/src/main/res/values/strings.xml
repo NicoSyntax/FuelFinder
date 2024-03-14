@@ -5,4 +5,9 @@
     <string name="bottom_nav_profile">Profile</string>
     <string name="bottom_nav_settings">Settings</string>
     <string name="bottom_nav_home">Home</string>
+    <string name="e5">E5</string>
+    <string name="e10">E10</string>
+    <string name="diesel">Diesel</string>
+    <string name="back_button">􁉉</string>
+    <string name="set_as_favourite">Als Favorit markieren</string>
 </resources>
