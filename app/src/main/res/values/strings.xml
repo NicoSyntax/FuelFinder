@@ -10,4 +10,9 @@
     <string name="diesel">Diesel</string>
     <string name="back_button">􁉉</string>
     <string name="set_as_favourite">Als Favorit markieren</string>
+    <string name="fuel_finder">Fuel Finder</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="login">Login</string>
+    <string name="sign_up">sign up</string>
 </resources>

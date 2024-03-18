@@ -37,6 +37,11 @@ class HomeDetailFragment : Fragment() {
 
         val station = viewModel.stations.value?.stations?.find { stationId == it.id }
 
+        if (station?.e10 == null){
+            binding.e10Price.text = "/"
+        } else {
+            binding.e10Price.text = station.e10.toString()
+        }
         binding.e10Price.text = station?.e10.toString()
         binding.e5Price.text = station?.e5.toString()
         binding.dieselPrice.text = station?.diesel.toString()
