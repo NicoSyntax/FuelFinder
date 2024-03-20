@@ -37,6 +37,7 @@ interface FuelFinderApiService{
     suspend fun getStations(
         @Query("apikey") key: String
     ): ApiResponse
+
 }
 
 object FuelFinderApi{

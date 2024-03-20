@@ -44,4 +44,13 @@
             android:name="StationId"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/profileFragment2"
+        android:name="de.syntax.androidabschluss.ui.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/settingsFragment3"
+        android:name="SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>
