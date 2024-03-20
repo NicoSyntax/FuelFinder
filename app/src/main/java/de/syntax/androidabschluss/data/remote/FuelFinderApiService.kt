@@ -38,6 +38,14 @@ interface FuelFinderApiService{
         @Query("apikey") key: String
     ): ApiResponse
 
+    @GET("json/list.php?type=all&")
+    suspend fun getStationsWithLocation(
+        @Query("lat") latitude: Double,
+        @Query("lng") longitude: Double,
+        @Query("rad") radius: Int,
+        @Query("apikey") key: String
+    ): ApiResponse
+
 }
 
 object FuelFinderApi{

@@ -21,15 +21,11 @@ class SettingsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Initialisiere den LocationManager
         locationManager = requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
-        // Überprüfe, ob die Berechtigung erteilt wurde
         if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            // Berechtigung erteilt, fordere den Standort des Benutzers an
             requestLocation()
         } else {
-            // Berechtigung noch nicht erteilt, fordere sie an
             requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), permissionRequestCode)
         }
     }
@@ -45,10 +41,10 @@ class SettingsFragment : Fragment() {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         if (requestCode == permissionRequestCode && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            // Standortberechtigung wurde erteilt, fordere den Standort des Benutzers an
+
             requestLocation()
         } else {
-            // Standortberechtigung wurde verweigert
+
             Toast.makeText(requireContext(), "Location permission denied", Toast.LENGTH_SHORT).show()
         }
     }
@@ -57,16 +53,16 @@ class SettingsFragment : Fragment() {
         try {
             val location: Location? = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
             if (location != null) {
-                // Handle the location here
+
                 val latitude = location.latitude
                 val longitude = location.longitude
-                // Use latitude and longitude
+
                 Toast.makeText(requireContext(), "Latitude: $latitude, Longitude: $longitude", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(requireContext(), "Location not available", Toast.LENGTH_SHORT).show()
             }
         } catch (e: SecurityException) {
-            // Berechtigung wurde nicht gewährt
+
             Toast.makeText(requireContext(), "Location permission not granted", Toast.LENGTH_SHORT).show()
         }
     }

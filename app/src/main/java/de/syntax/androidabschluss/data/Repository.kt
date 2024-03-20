@@ -24,4 +24,13 @@ class Repository(private val api: FuelFinderApi) {
             Log.e(TAG, "Error loading Data from Repository $e")
         }
     }
+
+    suspend fun getStationsWithLocation(lat: Double, lng: Double){
+        try {
+            val stations = api.retrofitService.getStationsWithLocation(lat, lng, 4, key)
+            _stationList.value = stations
+        } catch (e: Exception){
+            Log.e(TAG, "Error loading data with Location from Repository: $e")
+        }
+    }
 }

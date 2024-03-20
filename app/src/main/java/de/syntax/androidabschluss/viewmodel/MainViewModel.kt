@@ -26,5 +26,10 @@ class MainViewModel (application: Application): AndroidViewModel(application){
         }
     }
 
+    fun loadStationsWithLocation(lat: Double, lng: Double){
+        viewModelScope.launch {
+            repository.getStationsWithLocation(lat, lng)
+        }
+    }
 }
 
