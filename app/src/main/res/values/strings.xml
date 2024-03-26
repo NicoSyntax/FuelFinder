@@ -15,4 +15,6 @@
     <string name="password">password</string>
     <string name="login">Login</string>
     <string name="sign_up">sign up</string>
+    <string name="rad">Radius</string>
+    <string name="logout">Logout</string>
 </resources>

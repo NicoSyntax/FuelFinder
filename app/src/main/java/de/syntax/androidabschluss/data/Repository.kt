@@ -12,6 +12,8 @@ class Repository(private val api: FuelFinderApi) {
 
     private val key = "eaefa201-66ec-a001-e4ee-8a91dfdcc983"
 
+    var rad = 4
+
     private val _stationList = MutableLiveData<ApiResponse>()
     val stationList: LiveData<ApiResponse>
         get() = _stationList
@@ -27,8 +29,9 @@ class Repository(private val api: FuelFinderApi) {
 
     suspend fun getStationsWithLocation(lat: Double, lng: Double){
         try {
-            val stations = api.retrofitService.getStationsWithLocation(lat, lng, 4, key)
+            val stations = api.retrofitService.getStationsWithLocation(lat, lng, rad, key)
             _stationList.value = stations
+            Log.e(TAG, "current value of rad: $rad")
         } catch (e: Exception){
             Log.e(TAG, "Error loading data with Location from Repository: $e")
         }
