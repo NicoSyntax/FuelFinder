@@ -5,13 +5,16 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import de.syntax.androidabschluss.data.Repository
+import de.syntax.androidabschluss.data.model.Station
 import de.syntax.androidabschluss.data.remote.FuelFinderApi
+import de.syntax.androidabschluss.local.getDatabase
 import kotlinx.coroutines.launch
 
 class MainViewModel (application: Application): AndroidViewModel(application){
     private val TAG = "MainViewModel"
 
-    private val repository = Repository(FuelFinderApi)
+    private val database = getDatabase(application)
+    private val repository = Repository(FuelFinderApi, database)
 
     val stations = repository.stationList
 
@@ -29,6 +32,17 @@ class MainViewModel (application: Application): AndroidViewModel(application){
     fun loadStationsWithLocation(lat: Double, lng: Double){
         viewModelScope.launch {
             repository.getStationsWithLocation(lat, lng)
+        }
+    }
+
+    fun insertStation(station: Station) {
+        viewModelScope.launch {
+            repository.insertStation(station)
+        }
+    }
+    fun deleteStation(station: Station) {
+        viewModelScope.launch {
+            repository.deleteStation(station)
         }
     }
 }

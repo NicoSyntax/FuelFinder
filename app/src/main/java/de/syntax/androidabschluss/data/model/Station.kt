@@ -1,6 +1,11 @@
 package de.syntax.androidabschluss.data.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 data class Station (
+    @PrimaryKey(autoGenerate = false)
     val id: String,
     val name: String,
     val brand: String,

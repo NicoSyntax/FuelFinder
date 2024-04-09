@@ -53,6 +53,9 @@ class HomeDetailFragment : Fragment() {
         }
 
         binding.fvBtn.setOnClickListener {
+            if (station != null) {
+                viewModel.insertStation(station)
+            }
             station?.isFavourite = true
         }
     }

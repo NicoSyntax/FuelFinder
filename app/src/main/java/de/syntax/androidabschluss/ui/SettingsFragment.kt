@@ -1,5 +1,6 @@
 package de.syntax.androidabschluss.ui
 
+import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,11 +13,13 @@ import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.data.Repository
 import de.syntax.androidabschluss.data.remote.FuelFinderApi
 import de.syntax.androidabschluss.databinding.FragmentSettingsBinding
+import de.syntax.androidabschluss.local.getDatabase
 import de.syntax.androidabschluss.viewmodel.FirebaseViewModel
 
-class SettingsFragment : Fragment() {
+class SettingsFragment(application: Application) : Fragment() {
 
-    val repository = Repository(FuelFinderApi)
+    private val database = getDatabase(application)
+    val repository = Repository(FuelFinderApi, database)
     private lateinit var binding: FragmentSettingsBinding
     private val viewModel: FirebaseViewModel by activityViewModels()
 

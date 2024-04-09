@@ -18,7 +18,7 @@
             app:destination="@id/settingsFragment" />
         <action
             android:id="@+id/action_homeFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            app:destination="@id/favoriteFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -51,10 +51,10 @@
             app:argType="string" />
     </fragment>
     <fragment
-        android:id="@+id/profileFragment"
-        android:name="de.syntax.androidabschluss.ui.ProfileFragment"
+        android:id="@+id/favoriteFragment"
+        android:name="de.syntax.androidabschluss.ui.FavoriteFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_favorite" />
     <fragment
         android:id="@+id/settingsFragment"
         android:name="de.syntax.androidabschluss.ui.SettingsFragment"

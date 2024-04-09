@@ -15,8 +15,11 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.adapter.HomeAdapter
 import de.syntax.androidabschluss.databinding.FragmentHomeBinding
+import de.syntax.androidabschluss.viewmodel.FirebaseViewModel
 import de.syntax.androidabschluss.viewmodel.MainViewModel
 
 class HomeFragment : Fragment() {
@@ -24,6 +27,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var locationManager: LocationManager
     private val mainViewModel: MainViewModel by activityViewModels()
+    private val firebaseViewModel: FirebaseViewModel by activityViewModels()
     private lateinit var binding: FragmentHomeBinding
 
     private val locationListener: LocationListener = object : LocationListener {
@@ -79,6 +83,12 @@ class HomeFragment : Fragment() {
             binding.rvStations.adapter = HomeAdapter(it.stations)
         }
         binding.rvStations.setHasFixedSize(true)
+
+        firebaseViewModel.currentUser.observe(viewLifecycleOwner) { user ->
+            if (user == null) {
+                findNavController().navigate(R.id.loginFragment)
+            }
+        }
     }
 
     override fun onDestroy() {
