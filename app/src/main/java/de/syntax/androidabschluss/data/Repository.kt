@@ -45,7 +45,7 @@ class Repository(private val api: FuelFinderApi, private val database: StationDa
         try {
             database.FuelFinderDatabaseDao.insertStation(station)
         } catch (e: Exception) {
-            Log.e(TAG, "Error inserting Note from Database e: $e")
+            Log.e(TAG, "Error inserting Station from Database e: $e")
         }
     }
 
@@ -53,7 +53,7 @@ class Repository(private val api: FuelFinderApi, private val database: StationDa
         try {
             database.FuelFinderDatabaseDao.deleteStation(station)
         } catch (e: Exception) {
-            Log.e(TAG, "Error deleting Note from Database e: $e")
+            Log.e(TAG, "Error deleting Station from Database e: $e")
         }
     }
 }

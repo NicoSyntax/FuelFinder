@@ -42,9 +42,9 @@ class HomeDetailFragment : Fragment() {
         } else {
             binding.e10Price.text = station.e10.toString()
         }
-        binding.e10Price.text = station?.e10.toString()
-        binding.e5Price.text = station?.e5.toString()
-        binding.dieselPrice.text = station?.diesel.toString()
+        binding.e10Price.text = station?.e10.toString() + "€"
+        binding.e5Price.text = station?.e5.toString() + "€"
+        binding.dieselPrice.text = station?.diesel.toString() + "€"
         binding.stationAddress.text = station?.street + " " + station?.houseNumber
         binding.brandStation.text = station?.brand
         binding.backButton.setOnClickListener {

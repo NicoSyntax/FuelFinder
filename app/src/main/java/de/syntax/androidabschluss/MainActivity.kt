@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.signupFragment -> binding.bottomNavigationView.visibility = View.GONE
                 else -> binding.bottomNavigationView.visibility = View.VISIBLE
             }
-
         }
     }
 }

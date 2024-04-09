@@ -29,10 +29,10 @@ class HomeAdapter(val dataset:List<Station>) : RecyclerView.Adapter<HomeAdapter.
         if (station.e10 == null){
             holder.binding.e10Price.text = "/"
         } else {
-            holder.binding.e10Price.text = station.e10.toString()
+            holder.binding.e10Price.text = station.e10.toString() + "€"
         }
-        holder.binding.dieselPrice.text = station.diesel.toString()
-        holder.binding.e5Price.text = station.e5.toString()
+        holder.binding.dieselPrice.text = station.diesel.toString() + "€"
+        holder.binding.e5Price.text = station.e5.toString() + "€"
 
 
         if (!station.isOpen){
