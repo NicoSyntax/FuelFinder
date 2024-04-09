@@ -18,6 +18,8 @@ class MainViewModel (application: Application): AndroidViewModel(application){
 
     val stations = repository.stationList
 
+    val favorites = repository.favorites
+
 
     fun loadStations(){
         try {

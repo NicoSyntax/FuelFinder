@@ -17,6 +17,8 @@ class Repository(private val api: FuelFinderApi, private val database: StationDa
     var rad = 4
 
     private val _stationList = MutableLiveData<ApiResponse>()
+
+    val favorites: LiveData<List<Station>> = database.FuelFinderDatabaseDao.getAll()
     val stationList: LiveData<ApiResponse>
         get() = _stationList
 
