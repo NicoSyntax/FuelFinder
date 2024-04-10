@@ -18,4 +18,5 @@
     <string name="rad">Radius</string>
     <string name="logout">Logout</string>
     <string name="remove_favorite">Aus Favoriten entfernen</string>
+    <string name="navigate_to_station">Zur Tankstelle navigieren</string>
 </resources>

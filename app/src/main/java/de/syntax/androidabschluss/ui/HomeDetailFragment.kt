@@ -60,5 +60,14 @@ class HomeDetailFragment : Fragment() {
             station?.isFavourite = true
             Toast.makeText(context, "zu Favoriten hinzugefügt", Toast.LENGTH_LONG).show()
         }
+
+        binding.navigateBtn.setOnClickListener {
+            if (station != null) {
+                viewModel.navigateWithGoogle(
+                    requireContext(),
+                    station.street + station.houseNumber + " " + station.place + " " + station.postCode
+                )
+            }
+        }
     }
 }

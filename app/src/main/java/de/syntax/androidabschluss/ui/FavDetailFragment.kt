@@ -1,8 +1,5 @@
 package de.syntax.androidabschluss.ui
 
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -42,7 +39,7 @@ class FavDetailFragment : Fragment() {
 
         val station = viewModel.favorites.value?.find { stationId == it.id }
 
-        if (station?.e10 == null){
+        if (station?.e10 == null) {
             binding.e10Price.text = "/"
         } else {
             binding.e10Price.text = station.e10.toString()
@@ -64,19 +61,15 @@ class FavDetailFragment : Fragment() {
             station?.isFavourite = false
             Toast.makeText(context, "aus Favoriten entfernt", Toast.LENGTH_LONG).show()
         }
+
+        binding.navigateBtn.setOnClickListener {
+            if (station != null) {
+                viewModel.navigateWithGoogle(
+                    requireContext(),
+                    station.street + station.houseNumber + " " + station.place + " " + station.postCode
+                )
+            }
+        }
     }
 }
 
-fun openGoogleMapsNavigation(context: Context, address: String) {
-    val gmmIntentUri = Uri.parse("google.navigation:q=$address")
-
-    val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
-
-    mapIntent.setPackage("com.google.android.apps.maps")
-
-    if (mapIntent.resolveActivity(context.packageManager) != null) {
-        context.startActivity(mapIntent)
-    } else {
-        Toast.makeText(context, "Google maps wurde auf Ihrem Gerät nicht gefunden",Toast.LENGTH_LONG).show()
-    }
-}

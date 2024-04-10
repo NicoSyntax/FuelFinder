@@ -1,6 +1,9 @@
 package de.syntax.androidabschluss.viewmodel
 
 import android.app.Application
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
@@ -46,6 +49,16 @@ class MainViewModel (application: Application): AndroidViewModel(application){
         viewModelScope.launch {
             repository.deleteStation(station)
         }
+    }
+
+    fun navigateWithGoogle(context: Context, address: String) {
+        val gmmIntentUri = Uri.parse("google.navigation:q=$address")
+
+        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+
+        mapIntent.setPackage("com.google.android.apps.maps")
+
+        context.startActivity(mapIntent)
     }
 }
 
