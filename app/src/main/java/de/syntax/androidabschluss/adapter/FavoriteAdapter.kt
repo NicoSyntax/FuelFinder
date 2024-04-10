@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.data.model.Station
 import de.syntax.androidabschluss.databinding.StationItemBinding
-import de.syntax.androidabschluss.ui.HomeFragmentDirections
+import de.syntax.androidabschluss.ui.FavoriteFragmentDirections
 
 class FavoriteAdapter(val dataset: List<Station>) : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>(){
     inner class FavoriteViewHolder(val binding: StationItemBinding) : RecyclerView.ViewHolder(binding.root)
@@ -38,11 +38,6 @@ class FavoriteAdapter(val dataset: List<Station>) : RecyclerView.Adapter<Favorit
             holder.binding.stationItem.alpha = 0.5f
         }
 
-        holder.binding.stationItem.setOnClickListener {
-            val navController = holder.binding.stationItem.findNavController()
-            navController.navigate(
-                HomeFragmentDirections.actionHomeFragmentToHomeDetailFragment(station.id))
-        }
 
         if (station.brand.lowercase() == "shell"){
             holder.binding.stationIcon.setImageResource(R.drawable.shell)
@@ -52,6 +47,14 @@ class FavoriteAdapter(val dataset: List<Station>) : RecyclerView.Adapter<Favorit
             holder.binding.stationIcon.setImageResource(R.drawable.hoyer)
         } else if (station.brand.lowercase() == "hem"){
             holder.binding.stationIcon.setImageResource(R.drawable.hem)
+        }
+
+        holder.binding.stationItem.setOnClickListener {
+            holder.binding.stationItem.setOnClickListener {
+                val navController = holder.binding.stationItem.findNavController()
+                navController.navigate(
+                    FavoriteFragmentDirections.actionFavoriteFragmentToFavDetailFragment(station.id))
+            }
         }
     }
 }

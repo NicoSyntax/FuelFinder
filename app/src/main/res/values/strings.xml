@@ -17,4 +17,5 @@
     <string name="sign_up">sign up</string>
     <string name="rad">Radius</string>
     <string name="logout">Logout</string>
+    <string name="remove_favorite">Aus Favoriten entfernen</string>
 </resources>

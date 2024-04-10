@@ -54,9 +54,24 @@
         android:id="@+id/favoriteFragment"
         android:name="de.syntax.androidabschluss.ui.FavoriteFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_favorite" />
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_favDetailFragment"
+            app:destination="@id/favDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="de.syntax.androidabschluss.ui.SettingsFragment"
         android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/favDetailFragment"
+        android:name="de.syntax.androidabschluss.ui.FavDetailFragment"
+        android:label="FavDetailFragment" >
+        <action
+            android:id="@+id/action_favDetailFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
+        <argument
+            android:name="stationId"
+            app:argType="string" />
+    </fragment>
 </navigation>

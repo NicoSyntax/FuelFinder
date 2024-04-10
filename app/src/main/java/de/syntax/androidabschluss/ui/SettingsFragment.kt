@@ -57,5 +57,3 @@ class SettingsFragment(application: Application) : Fragment() {
 
     }
 }
-
-
