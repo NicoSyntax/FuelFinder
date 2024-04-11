@@ -1,6 +1,5 @@
 package de.syntax.androidabschluss.ui
 
-import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,18 +9,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import de.syntax.androidabschluss.R
-import de.syntax.androidabschluss.data.Repository
-import de.syntax.androidabschluss.data.remote.FuelFinderApi
 import de.syntax.androidabschluss.databinding.FragmentSettingsBinding
-import de.syntax.androidabschluss.local.getDatabase
 import de.syntax.androidabschluss.viewmodel.FirebaseViewModel
+import de.syntax.androidabschluss.viewmodel.MainViewModel
 
-class SettingsFragment(application: Application) : Fragment() {
+class SettingsFragment() : Fragment() {
 
-    private val database = getDatabase(application)
-    val repository = Repository(FuelFinderApi, database)
     private lateinit var binding: FragmentSettingsBinding
-    private val viewModel: FirebaseViewModel by activityViewModels()
+
+    private val firebaseViewModel: FirebaseViewModel by activityViewModels()
+    private val viewModel: MainViewModel by activityViewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,7 +38,7 @@ class SettingsFragment(application: Application) : Fragment() {
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 binding.sliderValue.text = progress.toString()
-                repository.rad = progress
+                viewModel.rad = progress
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {
@@ -51,7 +49,7 @@ class SettingsFragment(application: Application) : Fragment() {
         })
 
         binding.logoutBtn.setOnClickListener {
-            viewModel.logout()
+            firebaseViewModel.logout()
             findNavController().navigate(R.id.loginFragment)
         }
 

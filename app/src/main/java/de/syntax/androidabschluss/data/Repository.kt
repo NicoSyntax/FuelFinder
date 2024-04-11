@@ -14,7 +14,6 @@ class Repository(private val api: FuelFinderApi, private val database: StationDa
 
     private val key = "eaefa201-66ec-a001-e4ee-8a91dfdcc983"
 
-    var rad = 4
 
     private val _stationList = MutableLiveData<ApiResponse>()
 
@@ -31,7 +30,7 @@ class Repository(private val api: FuelFinderApi, private val database: StationDa
         }
     }
 
-    suspend fun getStationsWithLocation(lat: Double, lng: Double){
+    suspend fun getStationsWithLocation(lat: Double, lng: Double, rad: Int){
         try {
             val stations = api.retrofitService.getStationsWithLocation(lat, lng, rad, key)
             _stationList.value = stations

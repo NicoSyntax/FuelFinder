@@ -24,20 +24,19 @@ import de.syntax.androidabschluss.viewmodel.MainViewModel
 
 class HomeFragment : Fragment() {
 
-
     private lateinit var locationManager: LocationManager
+
     private val mainViewModel: MainViewModel by activityViewModels()
     private val firebaseViewModel: FirebaseViewModel by activityViewModels()
+
     private lateinit var binding: FragmentHomeBinding
 
     private val locationListener: LocationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
 
-
             val latitude = location.latitude
             val longitude = location.longitude
             mainViewModel.loadStationsWithLocation(latitude, longitude)
-
         }
 
         override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
@@ -104,7 +103,9 @@ class HomeFragment : Fragment() {
         if (requestCode == permissionRequestCode && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             requestLocationUpdates()
         } else {
-            Toast.makeText(requireContext(), "Location permission denied", Toast.LENGTH_SHORT)
+            Toast.makeText(requireContext(),
+                "Location permission denied",
+                Toast.LENGTH_SHORT)
                 .show()
         }
     }
@@ -118,7 +119,9 @@ class HomeFragment : Fragment() {
                 locationListener
             )
         } catch (e: SecurityException) {
-            Toast.makeText(requireContext(), "Location permission not granted", Toast.LENGTH_SHORT)
+            Toast.makeText(requireContext(),
+                "Location permission not granted",
+                Toast.LENGTH_SHORT)
                 .show()
         }
     }

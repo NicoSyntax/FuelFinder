@@ -19,6 +19,8 @@ class MainViewModel (application: Application): AndroidViewModel(application){
     private val database = getDatabase(application)
     private val repository = Repository(FuelFinderApi, database)
 
+    var rad = 4
+
     val stations = repository.stationList
 
     val favorites = repository.favorites
@@ -36,7 +38,7 @@ class MainViewModel (application: Application): AndroidViewModel(application){
 
     fun loadStationsWithLocation(lat: Double, lng: Double){
         viewModelScope.launch {
-            repository.getStationsWithLocation(lat, lng)
+            repository.getStationsWithLocation(lat, lng, rad)
         }
     }
 
