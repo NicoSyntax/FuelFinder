@@ -21,30 +21,33 @@
 
     <EditText
         android:id="@+id/signup_mail"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:ems="10"
-        android:hint="email"
-        android:background="@color/white"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="@+id/sign_up_title"
-        app:layout_constraintStart_toStartOf="@+id/sign_up_title"
-        app:layout_constraintTop_toBottomOf="@+id/sign_up_title" />
+        app:layout_constraintTop_toBottomOf="@id/sign_up_title"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="32dp"
+        android:drawablePadding="8dp"
+        android:hint="Email"
+        android:textColor="@color/white"
+        android:padding="12dp"
+        android:textColorHint="#A5FFFFFF"
+        android:autofillHints="emailAddress"
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/signup_password"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="password"
-        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/signup_mail"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="16dp"
+        android:drawablePadding="8dp"
+        android:textColor="@color/white"
+        android:hint="Passwort"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="@+id/signup_mail"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/signup_mail"
-        app:layout_constraintTop_toBottomOf="@+id/signup_mail" />
+        android:padding="12dp"
+        android:textColorHint="#A5FFFFFF"
+        android:autofillHints="password" />
 
     <Button
         android:id="@+id/signup_signup_button"

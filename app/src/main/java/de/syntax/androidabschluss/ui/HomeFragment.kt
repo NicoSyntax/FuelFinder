@@ -64,6 +64,7 @@ class HomeFragment : Fragment() {
                 permissionRequestCode
             )
         }
+        getCurrentLocationAndLoadStations()
     }
 
     override fun onCreateView(
@@ -87,6 +88,10 @@ class HomeFragment : Fragment() {
             if (user == null) {
                 findNavController().navigate(R.id.loginFragment)
             }
+        }
+
+        binding.refreshBtn.setOnClickListener {
+            getCurrentLocationAndLoadStations()
         }
     }
 
@@ -127,7 +132,24 @@ class HomeFragment : Fragment() {
     }
 
     companion object {
-        private const val MIN_TIME_FOR_UPDATE: Long = 1000 * 60 * 1
+        private const val MIN_TIME_FOR_UPDATE: Long = 1000 * 60
         private const val MIN_DISTANCE_CHANGE: Float = 10f
+    }
+
+    private fun getCurrentLocationAndLoadStations() {
+        try {
+            val lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+            lastKnownLocation?.let {
+
+                val latitude = it.latitude
+                val longitude = it.longitude
+                mainViewModel.loadStationsWithLocation(latitude, longitude)
+            }
+        } catch (e: SecurityException) {
+            Toast.makeText(requireContext(),
+                "Location permission not granted",
+                Toast.LENGTH_SHORT)
+                .show()
+        }
     }
 }

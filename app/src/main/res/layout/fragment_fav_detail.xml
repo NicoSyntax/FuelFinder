@@ -153,6 +153,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="24dp"
         android:backgroundTint="@color/blue"
+        android:textColor="@color/white"
         android:text="@string/navigate_to_station"/>
 
 

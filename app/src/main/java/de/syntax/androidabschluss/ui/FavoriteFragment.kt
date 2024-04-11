@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import de.syntax.androidabschluss.R
 import de.syntax.androidabschluss.adapter.FavoriteAdapter
 import de.syntax.androidabschluss.databinding.FragmentFavoriteBinding
 import de.syntax.androidabschluss.viewmodel.MainViewModel
@@ -29,7 +30,12 @@ class FavoriteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.favorites.observe(viewLifecycleOwner){
-            binding.rvStations.adapter = FavoriteAdapter(it)
+            if (viewModel.favorites.value?.isEmpty() == true){
+                binding.emptyFav.setText(R.string.sie_haben_noch_keine_favoriten_hinzugef_gt)
+            } else  {
+                binding.rvStations.adapter = FavoriteAdapter(it)
+                binding.emptyFav.text = " "
+            }
         }
         binding.rvStations.setHasFixedSize(true)
 

@@ -19,4 +19,5 @@
     <string name="logout">Logout</string>
     <string name="remove_favorite">Aus Favoriten entfernen</string>
     <string name="navigate_to_station">Zur Tankstelle navigieren</string>
+    <string name="sie_haben_noch_keine_favoriten_hinzugef_gt">Sie haben noch keine Favoriten hinzugefügt</string>
 </resources>
