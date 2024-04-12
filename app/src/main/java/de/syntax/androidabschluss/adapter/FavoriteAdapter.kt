@@ -39,14 +39,12 @@ class FavoriteAdapter(val dataset: List<Station>) : RecyclerView.Adapter<Favorit
         }
 
 
-        if (station.brand.lowercase() == "shell"){
-            holder.binding.stationIcon.setImageResource(R.drawable.shell)
-        } else if(station.brand.lowercase() == "aral"){
-            holder.binding.stationIcon.setImageResource(R.drawable.aral)
-        } else if (station.brand.lowercase() == "hoyer"){
-            holder.binding.stationIcon.setImageResource(R.drawable.hoyer)
-        } else if (station.brand.lowercase() == "hem"){
-            holder.binding.stationIcon.setImageResource(R.drawable.hem)
+        when (station.brand.lowercase()) {
+            "shell" -> holder.binding.stationIcon.setImageResource(R.drawable.shell)
+            "aral" -> holder.binding.stationIcon.setImageResource(R.drawable.aral)
+            "hoyer" -> holder.binding.stationIcon.setImageResource(R.drawable.hoyer)
+            "hem" -> holder.binding.stationIcon.setImageResource(R.drawable.hem)
+            else -> holder.binding.stationIcon.setImageResource(R.drawable.station)
         }
 
         holder.binding.stationItem.setOnClickListener {
