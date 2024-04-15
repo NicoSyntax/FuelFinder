@@ -21,6 +21,9 @@ class Repository(private val api: FuelFinderApi, private val database: StationDa
     val stationList: LiveData<ApiResponse>
         get() = _stationList
 
+    var selectesSpinnerItem = MutableLiveData<String>()
+
+
     suspend fun getStations() {
         try {
             val stations = api.retrofitService.getStations(key)

@@ -39,7 +39,7 @@ class HomeDetailFragment : Fragment() {
         val station = viewModel.stations.value?.stations?.find { stationId == it.id }
 
         if (station?.e10 == null){
-            binding.e10Price.text = "/"
+            binding.e10Price.text = " / "
         } else {
             binding.e10Price.text = station.e10.toString()
         }
@@ -48,6 +48,7 @@ class HomeDetailFragment : Fragment() {
         binding.dieselPrice.text = station?.diesel.toString() + "€"
         binding.stationAddress.text = station?.street + " " + station?.houseNumber
         binding.brandStation.text = station?.brand
+
         binding.backButton.setOnClickListener {
             val navController = binding.backButton.findNavController()
             navController.navigateUp()

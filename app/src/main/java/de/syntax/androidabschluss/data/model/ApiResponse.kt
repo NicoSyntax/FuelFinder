@@ -5,5 +5,5 @@ data class ApiResponse(
     val license: String,
     val data: String,
     val status: String,
-    val stations: List<Station>
+    var stations: List<Station>
 )

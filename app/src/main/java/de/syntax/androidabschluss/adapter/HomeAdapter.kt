@@ -33,6 +33,7 @@ class HomeAdapter(val dataset:List<Station>) : RecyclerView.Adapter<HomeAdapter.
         }
         holder.binding.dieselPrice.text = station.diesel.toString() + "€"
         holder.binding.e5Price.text = station.e5.toString() + "€"
+        holder.binding.tvDist.text = station.dist.toString() + " KM " + "Entfernt"
 
 
         if (!station.isOpen){
@@ -52,5 +53,6 @@ class HomeAdapter(val dataset:List<Station>) : RecyclerView.Adapter<HomeAdapter.
             "hem" -> holder.binding.stationIcon.setImageResource(R.drawable.hem)
             else -> holder.binding.stationIcon.setImageResource(R.drawable.station)
         }
+
     }
 }

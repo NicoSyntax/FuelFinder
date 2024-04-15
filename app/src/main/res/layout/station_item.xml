@@ -12,16 +12,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
         <ImageView
             android:id="@+id/station_icon"
             android:layout_width="125dp"
             android:layout_height="125dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:srcCompat="@drawable/station"
-            android:layout_marginTop="15dp"/>
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/station" />
 
+        <TextView
+            android:id="@+id/tv_dist"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/station_icon"
+            app:layout_constraintEnd_toEndOf="@id/station_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/station_icon"/>
 
         <TextView
             android:id="@+id/station_brand_tv"
@@ -68,6 +77,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:gravity="center"
             android:textColor="@color/white"
+            android:layout_marginStart="8dp"
             android:textSize="20dp"/>
 
 

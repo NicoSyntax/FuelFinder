@@ -8,6 +8,7 @@ import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -79,8 +80,30 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mainViewModel.stations.observe(viewLifecycleOwner){
-            binding.rvStations.adapter = HomeAdapter(it.stations)
+        mainViewModel.stations.observe(viewLifecycleOwner) { apiResponse ->
+
+            when (mainViewModel.selectedSpinnerItem.value) {
+                "Diesel" -> mainViewModel.stations.value?.stations =
+                    mainViewModel.stations.value?.stations?.sortedBy { it.diesel }!!
+
+                "E5" -> mainViewModel.stations.value?.stations =
+                    mainViewModel.stations.value?.stations?.sortedBy { it.e5 }!!
+
+                "E10" -> {
+                    mainViewModel.stations.value?.stations =
+                        mainViewModel.stations.value?.stations?.sortedBy { it.e10 }!!
+
+                    mainViewModel.stations.value?.stations?.filter { it.e10 != null }.toString()
+                }
+            }
+
+            if (mainViewModel.stations.value?.stations?.isEmpty() == true) {
+                binding.tvNoStation.visibility = View.VISIBLE
+            } else {
+                mainViewModel.selectedSpinnerItem.value?.let { Log.e("HomeFragment", it) }
+                binding.tvNoStation.visibility = View.GONE
+                binding.rvStations.adapter = HomeAdapter(apiResponse.stations)
+            }
         }
         binding.rvStations.setHasFixedSize(true)
 
@@ -93,6 +116,7 @@ class HomeFragment : Fragment() {
         binding.refreshBtn.setOnClickListener {
             getCurrentLocationAndLoadStations()
         }
+
     }
 
     override fun onDestroy() {
@@ -108,9 +132,11 @@ class HomeFragment : Fragment() {
         if (requestCode == permissionRequestCode && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             requestLocationUpdates()
         } else {
-            Toast.makeText(requireContext(),
+            Toast.makeText(
+                requireContext(),
                 "Location permission denied",
-                Toast.LENGTH_SHORT)
+                Toast.LENGTH_SHORT
+            )
                 .show()
         }
     }
@@ -124,9 +150,11 @@ class HomeFragment : Fragment() {
                 locationListener
             )
         } catch (e: SecurityException) {
-            Toast.makeText(requireContext(),
+            Toast.makeText(
+                requireContext(),
                 "Location permission not granted",
-                Toast.LENGTH_SHORT)
+                Toast.LENGTH_SHORT
+            )
                 .show()
         }
     }
@@ -138,7 +166,8 @@ class HomeFragment : Fragment() {
 
     private fun getCurrentLocationAndLoadStations() {
         try {
-            val lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+            val lastKnownLocation =
+                locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
             lastKnownLocation?.let {
 
                 val latitude = it.latitude
@@ -146,10 +175,13 @@ class HomeFragment : Fragment() {
                 mainViewModel.loadStationsWithLocation(latitude, longitude)
             }
         } catch (e: SecurityException) {
-            Toast.makeText(requireContext(),
+            Toast.makeText(
+                requireContext(),
                 "Location permission not granted",
-                Toast.LENGTH_SHORT)
+                Toast.LENGTH_SHORT
+            )
                 .show()
         }
     }
+
 }

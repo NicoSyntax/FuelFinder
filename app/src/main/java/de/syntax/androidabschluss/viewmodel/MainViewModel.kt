@@ -21,9 +21,11 @@ class MainViewModel (application: Application): AndroidViewModel(application){
 
     var rad = 4
 
-    val stations = repository.stationList
+    var stations = repository.stationList
 
     val favorites = repository.favorites
+
+    val selectedSpinnerItem = repository.selectesSpinnerItem
 
 
     fun loadStations(){
