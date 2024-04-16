@@ -27,7 +27,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/station_icon"
             app:layout_constraintEnd_toEndOf="@id/station_icon"
-            android:layout_width="25dp"
+            android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@+id/station_icon"/>
