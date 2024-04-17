@@ -32,10 +32,12 @@ class SignupFragment : Fragment() {
             signup()
         }
 
+        //navigate to Login
         binding.signupCancelButton.setOnClickListener {
             findNavController().navigate(SignupFragmentDirections.actionSignupFragmentToLoginFragment())
         }
 
+        //observe current user to navigate
         viewModel.currentUser.observe(viewLifecycleOwner) { user ->
             if (user != null) {
                 findNavController().navigate(de.syntax.androidabschluss.R.id.homeFragment)

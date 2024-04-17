@@ -36,6 +36,7 @@ class HomeDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //find right station by ID
         val station = viewModel.stations.value?.stations?.find { stationId == it.id }
 
         if (station?.e10 == null){
@@ -43,17 +44,21 @@ class HomeDetailFragment : Fragment() {
         } else {
             binding.e10Price.text = station.e10.toString()
         }
+
+        //set data into TV
         binding.e10Price.text = station?.e10.toString() + "€"
         binding.e5Price.text = station?.e5.toString() + "€"
         binding.dieselPrice.text = station?.diesel.toString() + "€"
         binding.stationAddress.text = station?.street + " " + station?.houseNumber
         binding.brandStation.text = station?.brand
 
+        //navigate back
         binding.backButton.setOnClickListener {
             val navController = binding.backButton.findNavController()
             navController.navigateUp()
         }
 
+        //insert station into database
         binding.fvBtn.setOnClickListener {
             if (station != null) {
                 viewModel.insertStation(station)
@@ -62,6 +67,7 @@ class HomeDetailFragment : Fragment() {
             Toast.makeText(context, "zu Favoriten hinzugefügt", Toast.LENGTH_LONG).show()
         }
 
+        //start google maps Intent with station address
         binding.navigateBtn.setOnClickListener {
             if (station != null) {
                 viewModel.navigateWithGoogle(

@@ -29,6 +29,7 @@ class FavoriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //set Text for empty database or set adapter if database is not empty
         viewModel.favorites.observe(viewLifecycleOwner){
             if (viewModel.favorites.value?.isEmpty() == true){
                 binding.emptyFav.setText(R.string.sie_haben_noch_keine_favoriten_hinzugef_gt)
@@ -37,6 +38,7 @@ class FavoriteFragment : Fragment() {
                 binding.emptyFav.text = " "
             }
         }
+        //fixed size for performance
         binding.rvStations.setHasFixedSize(true)
 
     }

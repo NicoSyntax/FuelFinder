@@ -36,12 +36,14 @@ class SettingsFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //Spinner options
         val spinnerItems = listOf(" - ", "E5", "E10", "Diesel")
 
         val seekBar = binding.radSlider
 
         binding.dropdownMenu.setBackgroundColor(resources.getColor(R.color.white))
 
+        //spinnerAdapter
         val arrayAdapter =
             ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerItems)
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -55,6 +57,7 @@ class SettingsFragment() : Fragment() {
                 position: Int,
                 id: Long
             ) {
+                //set selectedItem and Position in ViewModel
                 val selectedItem = parent?.getItemAtPosition(position).toString()
 
                 viewModel.selectedSpinnerItem.value = selectedItem
@@ -67,14 +70,16 @@ class SettingsFragment() : Fragment() {
             }
 
         }
-
+        //reset Spinner to last selected Item
         binding.dropdownMenu.setSelection(viewModel.spinnerPosition)
 
 
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                //set TV for current rad
                 binding.sliderValue.text = progress.toString() + " KM"
 
+                //set radius for search in viewModel
                 viewModel.rad = progress
 
             }
@@ -85,9 +90,11 @@ class SettingsFragment() : Fragment() {
             override fun onStopTrackingTouch(seekBar: SeekBar) {
             }
         })
+        //set slider to previous selected progress
         seekBar.progress = viewModel.rad
 
 
+        //remove current user
         binding.logoutBtn.setOnClickListener {
             firebaseViewModel.logout()
             findNavController().navigate(R.id.loginFragment)

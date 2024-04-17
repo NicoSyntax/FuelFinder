@@ -10,9 +10,12 @@ import de.syntax.androidabschluss.data.model.Station
 
 @Dao
 interface FuelFinderDatabaseDao {
+
+    //Insert Station into database
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertStation(station: Station)
 
+    //delete Station from database
     @Delete
     suspend fun deleteStation(station: Station)
 

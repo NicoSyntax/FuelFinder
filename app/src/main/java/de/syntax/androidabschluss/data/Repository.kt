@@ -3,10 +3,10 @@ package de.syntax.androidabschluss.data
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import de.syntax.androidabschluss.data.local.StationDatabase
 import de.syntax.androidabschluss.data.model.ApiResponse
 import de.syntax.androidabschluss.data.model.Station
 import de.syntax.androidabschluss.data.remote.FuelFinderApi
-import de.syntax.androidabschluss.data.local.StationDatabase
 
 
 class Repository(private val api: FuelFinderApi, private val database: StationDatabase) {
@@ -14,24 +14,17 @@ class Repository(private val api: FuelFinderApi, private val database: StationDa
 
     private val key = "eaefa201-66ec-a001-e4ee-8a91dfdcc983"
 
-
+    //data for HomeFragment
     private val _stationList = MutableLiveData<ApiResponse>()
 
-    val favorites: LiveData<List<Station>> = database.FuelFinderDatabaseDao.getAll()
     val stationList: LiveData<ApiResponse>
         get() = _stationList
 
-    var selectesSpinnerItem = MutableLiveData<String>()
+    //data from database
+    val favorites: LiveData<List<Station>> = database.FuelFinderDatabaseDao.getAll()
 
-
-    suspend fun getStations() {
-        try {
-            val stations = api.retrofitService.getStations(key)
-            _stationList.value = stations
-        } catch (e: Exception) {
-            Log.e(TAG, "Error loading Data from Repository $e")
-        }
-    }
+    //currently selected SpinnerItem from Settings
+    var selectedSpinnerItem = MutableLiveData<String>()
 
     suspend fun getStationsWithLocation(lat: Double, lng: Double, rad: Int){
         try {

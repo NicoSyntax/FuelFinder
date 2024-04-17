@@ -32,6 +32,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
 
+    //location listener to get current location from device and start api call with that location
     private val locationListener: LocationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
 
@@ -49,6 +50,7 @@ class HomeFragment : Fragment() {
 
     private val permissionRequestCode = 1
 
+    //get gps permission from user and load stations with location
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         locationManager =
@@ -80,6 +82,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //sort list depending on user settings
         mainViewModel.stations.observe(viewLifecycleOwner) { apiResponse ->
 
             when (mainViewModel.selectedSpinnerItem.value) {
@@ -97,6 +100,7 @@ class HomeFragment : Fragment() {
                 }
             }
 
+            //if api call failed make no stations found TV visible and set adapter
             if (mainViewModel.stations.value?.stations?.isEmpty() == true) {
                 binding.tvNoStation.visibility = View.VISIBLE
             } else {
@@ -105,25 +109,30 @@ class HomeFragment : Fragment() {
                 binding.rvStations.adapter = HomeAdapter(apiResponse.stations)
             }
         }
+        //set fixed size for performance
         binding.rvStations.setHasFixedSize(true)
 
+        //if no user logged in navigate to LoginFragment
         firebaseViewModel.currentUser.observe(viewLifecycleOwner) { user ->
             if (user == null) {
                 findNavController().navigate(R.id.loginFragment)
             }
         }
 
+        //refresh btn to make new apicall with device location
         binding.refreshBtn.setOnClickListener {
             getCurrentLocationAndLoadStations()
         }
 
     }
 
+    //remove location updates onDestroy
     override fun onDestroy() {
         super.onDestroy()
         locationManager.removeUpdates(locationListener)
     }
 
+    //handles permission granted and denies
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -141,6 +150,7 @@ class HomeFragment : Fragment() {
         }
     }
 
+    //update location from device
     private fun requestLocationUpdates() {
         try {
             locationManager.requestLocationUpdates(
@@ -159,11 +169,13 @@ class HomeFragment : Fragment() {
         }
     }
 
+    //settings for location updates (Time and Distance)
     companion object {
         private const val MIN_TIME_FOR_UPDATE: Long = 1000 * 60
         private const val MIN_DISTANCE_CHANGE: Float = 10f
     }
 
+    //get Location from device and send APICall
     private fun getCurrentLocationAndLoadStations() {
         try {
             val lastKnownLocation =

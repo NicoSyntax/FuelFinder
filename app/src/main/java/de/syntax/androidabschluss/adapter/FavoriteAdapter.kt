@@ -24,6 +24,7 @@ class FavoriteAdapter(val dataset: List<Station>) : RecyclerView.Adapter<Favorit
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
         val station = dataset[position]
 
+        //set station data into TV
         holder.binding.stationBrandTv.text = station.brand
         if (station.e10 == null){
             holder.binding.e10Price.text = "/"
@@ -33,12 +34,13 @@ class FavoriteAdapter(val dataset: List<Station>) : RecyclerView.Adapter<Favorit
         holder.binding.dieselPrice.text = station.diesel.toString()
         holder.binding.e5Price.text = station.e5.toString()
 
-
+        //mark closed station
         if (!station.isOpen){
             holder.binding.stationItem.alpha = 0.5f
         }
 
 
+        //set Image depending on station brand
         when (station.brand.lowercase()) {
             "shell" -> holder.binding.stationIcon.setImageResource(R.drawable.shell)
             "aral" -> holder.binding.stationIcon.setImageResource(R.drawable.aral)
@@ -47,6 +49,8 @@ class FavoriteAdapter(val dataset: List<Station>) : RecyclerView.Adapter<Favorit
             else -> holder.binding.stationIcon.setImageResource(R.drawable.station)
         }
 
+
+        //navigate to FavDetailFragment
         holder.binding.stationItem.setOnClickListener {
             holder.binding.stationItem.setOnClickListener {
                 val navController = holder.binding.stationItem.findNavController()

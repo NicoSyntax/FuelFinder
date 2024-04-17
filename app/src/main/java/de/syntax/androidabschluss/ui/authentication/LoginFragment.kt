@@ -28,6 +28,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //login with email and password
         binding.loginButton.setOnClickListener {
             val email = binding.loginEmailEdit.text.toString()
             val password = binding.loginPasswordEdit.text.toString()
@@ -37,12 +38,14 @@ class LoginFragment : Fragment() {
             }
         }
 
+        //observe current user to login
         viewModel.currentUser.observe(viewLifecycleOwner) {
             if (it != null) {
                 findNavController().navigate(R.id.homeFragment)
             }
         }
 
+        //navigate to SignUp
         binding.loginSignupButton.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignupFragment())
         }

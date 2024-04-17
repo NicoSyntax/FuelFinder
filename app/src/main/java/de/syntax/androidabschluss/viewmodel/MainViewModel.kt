@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import de.syntax.androidabschluss.data.Repository
@@ -25,20 +24,9 @@ class MainViewModel (application: Application): AndroidViewModel(application){
 
     val favorites = repository.favorites
 
-    val selectedSpinnerItem = repository.selectesSpinnerItem
+    val selectedSpinnerItem = repository.selectedSpinnerItem
 
     var spinnerPosition = 0
-
-
-    fun loadStations(){
-        try {
-            viewModelScope.launch {
-                repository.getStations()
-            }
-        } catch (e: Exception){
-            Log.e(TAG, "error loading data: $e")
-        }
-    }
 
     fun loadStationsWithLocation(lat: Double, lng: Double){
         viewModelScope.launch {

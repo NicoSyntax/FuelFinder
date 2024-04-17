@@ -33,11 +33,8 @@ private val retrofit = Retrofit.Builder()
 
 
 interface FuelFinderApiService{
-    @GET("json/list.php?lat=52.45277&lng=9.75456&rad=4&type=all&")
-    suspend fun getStations(
-        @Query("apikey") key: String
-    ): ApiResponse
 
+    //get Station with device Location
     @GET("json/list.php?type=all&")
     suspend fun getStationsWithLocation(
         @Query("lat") latitude: Double,

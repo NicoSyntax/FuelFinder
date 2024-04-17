@@ -25,6 +25,7 @@ class HomeAdapter(val dataset:List<Station>) : RecyclerView.Adapter<HomeAdapter.
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         val station = dataset[position]
 
+        //Setting data into textview
         holder.binding.stationBrandTv.text = station.brand
         if (station.e10 == null){
             holder.binding.e10Price.text = "/"
@@ -35,17 +36,20 @@ class HomeAdapter(val dataset:List<Station>) : RecyclerView.Adapter<HomeAdapter.
         holder.binding.e5Price.text = station.e5.toString() + "€"
         holder.binding.tvDist.text = station.dist.toString() + " KM " + "Entfernt"
 
-
+        //Mark Station which are closed
         if (!station.isOpen){
             holder.binding.stationItem.alpha = 0.5f
         }
 
+        //Navigation to HomeDetail
         holder.binding.stationItem.setOnClickListener {
             val navController = holder.binding.stationItem.findNavController()
             navController.navigate(
                 HomeFragmentDirections.actionHomeFragmentToHomeDetailFragment(station.id))
         }
 
+
+        //set IV depending on brand
         when (station.brand.lowercase()) {
             "shell" -> holder.binding.stationIcon.setImageResource(R.drawable.shell)
             "aral" -> holder.binding.stationIcon.setImageResource(R.drawable.aral)

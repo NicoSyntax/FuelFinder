@@ -37,23 +37,30 @@ class FavDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //find right station by ID
         val station = viewModel.favorites.value?.find { stationId == it.id }
+
 
         if (station?.e10 == null) {
             binding.e10Price.text = "/"
         } else {
             binding.e10Price.text = station.e10.toString()
         }
+
+        //set data for detail fragment into TV
         binding.e10Price.text = station?.e10.toString() + "€"
         binding.e5Price.text = station?.e5.toString() + "€"
         binding.dieselPrice.text = station?.diesel.toString() + "€"
         binding.stationAddress.text = station?.street + " " + station?.houseNumber
         binding.brandStation.text = station?.brand
+
+        //navigate back
         binding.backButton.setOnClickListener {
             val navController = binding.backButton.findNavController()
             navController.navigateUp()
         }
 
+        //delete station from Database
         binding.removeFv.setOnClickListener {
             if (station != null) {
                 viewModel.deleteStation(station)
@@ -62,6 +69,8 @@ class FavDetailFragment : Fragment() {
             Toast.makeText(context, "aus Favoriten entfernt", Toast.LENGTH_LONG).show()
         }
 
+
+        //navigate btn to start google intent with address from station
         binding.navigateBtn.setOnClickListener {
             if (station != null) {
                 viewModel.navigateWithGoogle(
