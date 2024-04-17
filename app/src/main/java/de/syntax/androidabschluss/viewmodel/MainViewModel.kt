@@ -8,9 +8,9 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import de.syntax.androidabschluss.data.Repository
+import de.syntax.androidabschluss.data.local.getDatabase
 import de.syntax.androidabschluss.data.model.Station
 import de.syntax.androidabschluss.data.remote.FuelFinderApi
-import de.syntax.androidabschluss.local.getDatabase
 import kotlinx.coroutines.launch
 
 class MainViewModel (application: Application): AndroidViewModel(application){
@@ -26,6 +26,8 @@ class MainViewModel (application: Application): AndroidViewModel(application){
     val favorites = repository.favorites
 
     val selectedSpinnerItem = repository.selectesSpinnerItem
+
+    var spinnerPosition = 0
 
 
     fun loadStations(){

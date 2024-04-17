@@ -27,7 +27,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:textStyle="bold"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:text="@string/sie_haben_noch_keine_favoriten_hinzugef_gt"
         android:textColor="@color/white"/>
 

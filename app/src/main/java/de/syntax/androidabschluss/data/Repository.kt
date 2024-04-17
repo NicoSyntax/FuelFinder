@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import de.syntax.androidabschluss.data.model.ApiResponse
 import de.syntax.androidabschluss.data.model.Station
 import de.syntax.androidabschluss.data.remote.FuelFinderApi
-import de.syntax.androidabschluss.local.StationDatabase
+import de.syntax.androidabschluss.data.local.StationDatabase
 
 
 class Repository(private val api: FuelFinderApi, private val database: StationDatabase) {

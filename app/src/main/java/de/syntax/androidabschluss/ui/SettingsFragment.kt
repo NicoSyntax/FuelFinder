@@ -36,13 +36,14 @@ class SettingsFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val spinnerItems= listOf(" - ", "E5", "E10", "Diesel")
+        val spinnerItems = listOf(" - ", "E5", "E10", "Diesel")
 
         val seekBar = binding.radSlider
 
         binding.dropdownMenu.setBackgroundColor(resources.getColor(R.color.white))
 
-        val arrayAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerItems)
+        val arrayAdapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerItems)
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         binding.dropdownMenu.adapter = arrayAdapter
@@ -55,10 +56,10 @@ class SettingsFragment() : Fragment() {
                 id: Long
             ) {
                 val selectedItem = parent?.getItemAtPosition(position).toString()
-                if (selectedItem != " - "){
-                    viewModel.selectedSpinnerItem.value = selectedItem
-                }
 
+                viewModel.selectedSpinnerItem.value = selectedItem
+
+                viewModel.spinnerPosition = position
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -67,14 +68,14 @@ class SettingsFragment() : Fragment() {
 
         }
 
+        binding.dropdownMenu.setSelection(viewModel.spinnerPosition)
+
 
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 binding.sliderValue.text = progress.toString() + " KM"
 
-                if (progress != 4){
-                    viewModel.rad = progress
-                }
+                viewModel.rad = progress
 
             }
 
@@ -84,21 +85,13 @@ class SettingsFragment() : Fragment() {
             override fun onStopTrackingTouch(seekBar: SeekBar) {
             }
         })
+        seekBar.progress = viewModel.rad
+
 
         binding.logoutBtn.setOnClickListener {
             firebaseViewModel.logout()
             findNavController().navigate(R.id.loginFragment)
         }
 
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        binding.dropdownMenu.onSaveInstanceState()
-    }
-
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-        binding.dropdownMenu.selectedItem
     }
 }

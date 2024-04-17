@@ -1,4 +1,4 @@
-package de.syntax.androidabschluss.local
+package de.syntax.androidabschluss.data.local
 
 import android.content.Context
 import androidx.room.Database
