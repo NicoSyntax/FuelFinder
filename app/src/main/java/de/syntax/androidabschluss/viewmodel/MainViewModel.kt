@@ -13,7 +13,6 @@ import de.syntax.androidabschluss.data.remote.FuelFinderApi
 import kotlinx.coroutines.launch
 
 class MainViewModel (application: Application): AndroidViewModel(application){
-    private val TAG = "MainViewModel"
 
     private val database = getDatabase(application)
     private val repository = Repository(FuelFinderApi, database)
