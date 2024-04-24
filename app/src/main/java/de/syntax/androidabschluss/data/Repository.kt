@@ -12,7 +12,7 @@ import de.syntax.androidabschluss.data.remote.FuelFinderApi
 class Repository(private val api: FuelFinderApi, private val database: StationDatabase) {
     private val TAG = "Repository"
 
-    private val key = "eaefa201-66ec-a001-e4ee-8a91dfdcc983"
+    private val key = de.syntax.androidabschluss.BuildConfig.apiKey
 
     //data for HomeFragment
     private val _stationList = MutableLiveData<ApiResponse>()

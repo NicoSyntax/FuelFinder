@@ -8,6 +8,10 @@ plugins {
     id("com.google.devtools.ksp")
 }
 
+def propertiesFile = rootProject.file("local.properties")
+def properties = new Properties()
+properties.load(new FileInputStream(propertiesFile))
+def apiKey = properties.getProperty("apiKey")
 
 android {
 
@@ -26,8 +30,12 @@ android {
 
     buildTypes {
         release {
+            buildConfigField("String", "apiKey", apiKey)
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug{
+            buildConfigField("String", "apiKey", apiKey)
         }
     }
     compileOptions {
@@ -40,6 +48,7 @@ android {
 
     buildFeatures{
         viewBinding = true
+        buildConfig = true
     }
 }
 
