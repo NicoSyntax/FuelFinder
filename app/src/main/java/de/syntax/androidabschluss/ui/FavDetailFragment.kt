@@ -29,7 +29,7 @@ class FavDetailFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentFavDetailBinding.inflate(inflater, container, false)
         return binding.root
     }

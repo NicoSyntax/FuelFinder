@@ -12,7 +12,7 @@ import retrofit2.http.Query
 
 const val BASE_URL = "https://creativecommons.tankerkoenig.de/"
 
-private val logger: HttpLoggingInterceptor = HttpLoggingInterceptor().apply{
+private val logger: HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
     level = HttpLoggingInterceptor.Level.BODY
 }
 
@@ -31,7 +31,7 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 
-interface FuelFinderApiService{
+interface FuelFinderApiService {
 
     //get Station with device Location
     @GET("json/list.php?type=all&")
@@ -44,6 +44,6 @@ interface FuelFinderApiService{
 
 }
 
-object FuelFinderApi{
+object FuelFinderApi {
     val retrofitService: FuelFinderApiService by lazy { retrofit.create(FuelFinderApiService::class.java) }
 }

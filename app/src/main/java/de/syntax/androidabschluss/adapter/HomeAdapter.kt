@@ -9,7 +9,7 @@ import de.syntax.androidabschluss.data.model.Station
 import de.syntax.androidabschluss.databinding.StationItemBinding
 import de.syntax.androidabschluss.ui.HomeFragmentDirections
 
-class HomeAdapter(val dataset:List<Station>) : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
+class HomeAdapter(val dataset: List<Station>) : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
     inner class HomeViewHolder(val binding: StationItemBinding) : RecyclerView.ViewHolder(binding.root)
 
